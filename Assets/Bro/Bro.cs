@@ -4,44 +4,86 @@ using UnityEngine;
 
 public class Bro : MonoBehaviour
 {
-    public float speed = 15.0f;
+    public float runspeed = 15.0f;
+    public float jumpspeed = 15.0f;
 
-    void Start()
+    [SerializeField] private LayerMask platformsLayerMask;
+
+    private Rigidbody2D rigidBody2d;
+    private PolygonCollider2D polyCollider2d;
+    private Quaternion mouseRotation;
+
+    private void Awake()
     {
-
+        rigidBody2d = transform.GetComponent<Rigidbody2D>();
+        polyCollider2d = transform.GetComponent<PolygonCollider2D>();
     }
 
+ 
     void Update()
     {
-       
-        if (Input.GetKeyDown("right"))
+        HandleRotation();
+        HandleMovement();
+        HandleJump();
+    }
+    private bool IsGrounded()
+    {
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(polyCollider2d.bounds.center, polyCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformsLayerMask);
+        return raycastHit2D.collider != null;
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 shotDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        var angle = Mathf.Atan2(shotDirection.y, shotDirection.x) * Mathf.Rad2Deg;
+
+        if (angle < 90 || angle > -90)
         {
-            if(transform.rotation != Quaternion.Euler(0, 0, 0))
+            if (transform.rotation != Quaternion.Euler(0, 0, 0))
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
-        if (Input.GetKeyDown("left"))
+
+        if (angle > 90 || angle < -90)
         {
             if (transform.rotation != Quaternion.Euler(0, 180, 0))
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
-
-        float translation_y = Input.GetAxis("Vertical") * speed;
-        float translation_x = Input.GetAxis("Horizontal") * speed;
-
-        translation_y *= Time.deltaTime;
-        translation_x *= Time.deltaTime;
-
-        transform.Translate(0, translation_y, 0, Space.World);
-        transform.Translate(translation_x, 0, 0, Space.World);
-
+        
+        if (Input.GetKeyDown("d"))
+        {
+            if (transform.rotation != Quaternion.Euler(0, 0, 0))
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+        if (Input.GetKeyDown("a"))
+        {
+            if (transform.rotation != Quaternion.Euler(0, 180, 0))
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
     }
 
-    private void Flip()
+    private void HandleMovement()
     {
-        transform.Rotate(0f, 180f, 0f);
+        float translation_x = Input.GetAxis("Horizontal") * runspeed;
+        translation_x *= Time.deltaTime;
+        transform.Translate(translation_x, 0, 0, Space.World);
+    }
+
+    private void HandleJump()
+    {
+        if (Input.GetKeyDown("w"))
+        {
+            if (IsGrounded())
+            {
+                rigidBody2d.velocity = Vector2.up * jumpspeed;
+            }
+        }
     }
 }

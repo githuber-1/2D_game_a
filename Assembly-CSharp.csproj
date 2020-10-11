@@ -614,8 +614,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/huber/repos/UNITY_repos/2D_a/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.IK.Editor">
+      <HintPath>C:/Users/huber/repos/UNITY_repos/2D_a/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Path.Editor">
       <HintPath>C:/Users/huber/repos/UNITY_repos/2D_a/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.IK.Runtime">
+      <HintPath>C:/Users/huber/repos/UNITY_repos/2D_a/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/huber/repos/UNITY_repos/2D_a/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>

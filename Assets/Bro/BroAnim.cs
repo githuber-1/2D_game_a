@@ -10,10 +10,15 @@ public class BroAnim : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-   
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        HandleRunning();
+        HandleJumping();
+    }
+
+    private void HandleRunning()
+    {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             anim.SetBool("isRunning", true);
         }
@@ -21,5 +26,9 @@ public class BroAnim : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
+    }
+    private void HandleJumping()
+    {
+        
     }
 }

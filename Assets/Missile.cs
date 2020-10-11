@@ -15,12 +15,13 @@ public class Missile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         Enemy enemy = collision.GetComponent<Enemy>();
         if(enemy != null)
         {
             enemy.TakeDamage(30);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+       
     }
+    
 }
