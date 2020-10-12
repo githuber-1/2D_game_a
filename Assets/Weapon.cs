@@ -25,12 +25,10 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         Vector3 shotDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
-        var angle = Mathf.Atan2(shotDirection.y, shotDirection.x) * Mathf.Rad2Deg;
-        float offset = Random.Range(-bulletSpread, bulletSpread);
-        offsetRotation = Quaternion.Euler(0f, 0f, offset);
-        mouseRotation = Quaternion.Euler(0f, 0f, angle + offsetRotation.eulerAngles.z);
-
-        Debug.Log(angle);
+        var shotAngle = Mathf.Atan2(shotDirection.y, shotDirection.x) * Mathf.Rad2Deg;
+        float angleOffset = Random.Range(-bulletSpread, bulletSpread);
+        offsetRotation = Quaternion.Euler(0f, 0f, angleOffset);
+        mouseRotation = Quaternion.Euler(0f, 0f, shotAngle + offsetRotation.eulerAngles.z);
 
         Instantiate(bulletPrefab, firePoint.position, mouseRotation);
     }
