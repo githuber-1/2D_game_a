@@ -66,6 +66,8 @@
     <Compile Include="Assets\Bro\Bro.cs" />
     <Compile Include="Assets\Bro\BroAnim.cs" />
     <Compile Include="Assets\Enemy\Enemy.cs" />
+    <Compile Include="Assets\EnemyMissile.cs" />
+    <Compile Include="Assets\EnemyWeapon.cs" />
     <Compile Include="Assets\Missile.cs" />
     <Compile Include="Assets\Weapon.cs" />
     <Reference Include="UnityEngine">

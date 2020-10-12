@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bro : MonoBehaviour
 {
+    public int health = 100;
     public float runspeed = 15.0f;
     public float jumpspeed = 15.0f;
 
@@ -26,7 +27,7 @@ public class Bro : MonoBehaviour
         HandleMovement();
         HandleJump();
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(polyCollider2d.bounds.center, polyCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformsLayerMask);
         return raycastHit2D.collider != null;
@@ -34,8 +35,8 @@ public class Bro : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 shotDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        var angle = Mathf.Atan2(shotDirection.y, shotDirection.x) * Mathf.Rad2Deg;
+        Vector3 mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        var angle = Mathf.Atan2(mouseDirection.y, mouseDirection.x) * Mathf.Rad2Deg;
 
         if (angle < 90 || angle > -90)
         {
@@ -85,5 +86,19 @@ public class Bro : MonoBehaviour
                 rigidBody2d.velocity = Vector2.up * jumpspeed;
             }
         }
+    }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health < 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

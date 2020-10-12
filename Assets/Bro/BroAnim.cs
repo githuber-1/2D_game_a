@@ -5,6 +5,7 @@ using UnityEngine;
 public class BroAnim : MonoBehaviour
 {
     private Animator anim;
+    //private Bro bro;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -13,7 +14,7 @@ public class BroAnim : MonoBehaviour
     void Update()
     {
         HandleRunning();
-        HandleJumping();
+        //HandleJumping();
     }
 
     private void HandleRunning()
@@ -27,8 +28,15 @@ public class BroAnim : MonoBehaviour
             anim.SetBool("isRunning", false);
         }
     }
-    private void HandleJumping()
-    {
-        
-    }
+   // private void HandleJumping()
+   // {
+        //if (bro.IsGrounded())
+       // {
+            //anim.SetBool("isJumping", false);
+        //}
+        //else
+        //{
+            //anim.SetBool("IsJumping", true);
+        //}
+    //}
 }
